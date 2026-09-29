@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevOps Test Project - API</title>
+  <style>
+    body {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #222;
+      line-height: 1.4;
+    }
+    h1 { font-size: 1.15rem; margin: 0 0 1rem 0; }
+    h2 { font-size: 1rem; margin: 1.5rem 0 0.5rem 0; }
+    button {
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.5rem 0.5rem 0;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #888;
+      border-radius: 3px;
+    }
+    button:hover  { background: #eee; }
+    button:active { background: #ddd; }
+    pre {
+      background: #f6f6f6;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 1rem;
+      min-height: 6rem;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .row { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+  <h1>InnoTech DevOps Test Task</h1>
+
+  <h1>Endpoints</h1>
+
+  <div class="row">
+    <button data-method="GET"  data-url="/">GET /</button>
+    <button data-method="GET"  data-url="/health">GET /health</button>
+    <button data-method="GET"  data-url="/data">GET /data</button>
+    <button data-method="POST" data-url="/data">POST /data</button>
+  </div>
+
+  <h2>Response</h2>
+  <pre id="out">Select an endpoint above.</pre>
+
+  <script>
+    const out = document.getElementById("out");
+
+    async function call(method, url) {
+      out.textContent = method + " " + url + "\n\nLoading...";
+      try {
+        const res  = await fetch(url, { method });
+        const text = await res.text();
+
+        let body;
+        try {
+          body = JSON.stringify(JSON.parse(text), null, 2);
+        } catch (_) {
+          body = text;
+        }
+
+        out.textContent =
+          method + " " + url + "\n" +
+          "Status: " + res.status + " " + res.statusText + "\n\n" +
+          body;
+      } catch (err) {
+        out.textContent = method + " " + url + "\n\nError: " + err.message;
+      }
+    }
+
+    document.querySelectorAll("button[data-url]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        call(btn.dataset.method, btn.dataset.url);
+      });
+    });
+  </script>
+
+</body>
+</html>
