@@ -1,5 +1,5 @@
 # Собираем проект
-FROM python:3.14.7-alpine AS builder
+FROM python:3.12-alpine AS builder
 
 WORKDIR /build
 
@@ -14,7 +14,7 @@ COPY app/requirements.txt .
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 # Оставляем самое необходимое
-FROM python:3.14.7-alpine
+FROM python:3.12-alpine
 
 RUN apk add --no-cache libpq tzdata \
     && addgroup -S app \
