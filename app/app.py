@@ -86,7 +86,7 @@ def data():
         conn.commit()
         
         # Получаем все записи
-        cur.execute("SELECT id, message, created_at FROM test_data ORDER BY created_at DESC LIMIT 10")
+        cur.execute("SELECT id, message, created_at FROM test_data ORDER BY created_at DESC LIMIT 100")
         records = cur.fetchall()
         
         cur.close()
