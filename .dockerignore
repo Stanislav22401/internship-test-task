@@ -1,0 +1,43 @@
+# VCS
+.git
+.gitignore
+.gitattributes
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Docs / логи
+*.md
+!README.md
+*.log
+logs/
+
+# Инфраструктура nginx
+nginx/
+docker-compose.yml
+
+# Прочее
+Dockerfile
+.dockerignore
+certbot-www/
